@@ -43,5 +43,5 @@ jobs:
       GITLEAKS_LICENSE: ${{ secrets.GITLEAKS_LICENSE }}
       SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
       SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-      SAFESWIFT_API_KEY: ${{ secrets.SAFESWIFT_API_KEY }}
+      SAFETY_API_KEY: ${{ secrets.SAFETY_API_KEY }}
       DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
