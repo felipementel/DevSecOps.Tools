@@ -2,6 +2,8 @@
 bin/
 obj/
 
+output_build/
+
 # Test and coverage output
 TestResults/
 coverage/
