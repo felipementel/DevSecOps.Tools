@@ -42,6 +42,7 @@ jobs:
       security-events: write
       contents: read
       id-token: write
+      packages: write
     secrets:
       SONAR_PROJECT_KEY: ${{ secrets.SONAR_PROJECT_KEY }}
       GITLEAKS_LICENSE: ${{ secrets.GITLEAKS_LICENSE }}
