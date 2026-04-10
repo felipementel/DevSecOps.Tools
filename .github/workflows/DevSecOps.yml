@@ -38,6 +38,10 @@ jobs:
       imageName: 'project-api'
       openAPIFolder: 'open-api'
       msgCanalDeploy: 'Canal DEPLOY - O melhor canal sobre .NET, Azure, DevOps e IA'
+    permissions:
+      security-events: write
+      contents: read
+      id-token: write
     secrets:
       SONAR_PROJECT_KEY: ${{ secrets.SONAR_PROJECT_KEY }}
       GITLEAKS_LICENSE: ${{ secrets.GITLEAKS_LICENSE }}
