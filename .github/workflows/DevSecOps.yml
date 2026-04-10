@@ -36,7 +36,7 @@ jobs:
       dotnetVersion: '10.x'
       projectBaseDir: ./src
       solutionFileName: 'UsuariosApi.slnx'
-      mainProject: 'UsuariosApi'
+      mainProject: 'Usuarios.Api'
       testsFolder: 'tests'
       reportTitle: 'Canal DEPLOY'
       sonarExclusions: ''
