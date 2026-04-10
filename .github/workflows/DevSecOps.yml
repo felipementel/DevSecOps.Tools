@@ -20,14 +20,20 @@ on:
         options:
           - Build
           - Build + Tag Validation
+      environment:
+        description: "Selecione o ambiente de implantação"
+        required: true
+        default: 'DEV'
+        type: environment
 
 jobs:
   devsecops:
     name: DevSecOps Pipeline
     uses: felipementel/reusable-workflows/.github/workflows/example-devsecops-dotnet-sandbox-api.yml@main
+    environment: ${{ inputs.environment }}
     with:
       buildMode: ${{ github.event_name == 'workflow_dispatch' && inputs.buildMode || 'Build' }}
-      environment: 'DEV'
+      environment: ${{ inputs.environment }}
       dotnetVersion: '10.x'
       projectBaseDir: ./src
       solutionFileName: 'UsuariosApi.slnx'
