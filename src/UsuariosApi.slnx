@@ -6,6 +6,6 @@
     <Project Path="Usuarios.Domain/Usuarios.Domain.csproj" />
   </Folder>
   <Folder Name="/tests/">
-    <Project Path="tests/Usuarios.Tests/Usuarios.Tests.csproj" />
+    <Project Path="../tests/Usuarios.Tests/Usuarios.Tests.csproj" />
   </Folder>
 </Solution>
