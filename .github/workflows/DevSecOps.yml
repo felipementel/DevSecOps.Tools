@@ -30,10 +30,10 @@ jobs:
   devsecops:
     name: DevSecOps Pipeline
     uses: felipementel/reusable-workflows/.github/workflows/example-devsecops-dotnet-sandbox-api.yml@main
-    environment: ${{ inputs.environment }}
+    environment: 'DEV'
     with:
       buildMode: ${{ github.event_name == 'workflow_dispatch' && inputs.buildMode || 'Build' }}
-      environment: ${{ inputs.environment }}
+      environment: ${{ inputs.environments }}
       dotnetVersion: '10.x'
       projectBaseDir: ./src
       solutionFileName: 'UsuariosApi.slnx'
