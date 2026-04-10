@@ -8,7 +8,8 @@
     <ContainerRepository>canal-deploy</ContainerRepository>
     <UserSecretsId>f37df685-f024-46d8-be4d-fbf46c25d53f</UserSecretsId>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
-    <OpenApiDocumentsDirectory>open-api</OpenApiDocumentsDirectory>
+    <OpenApiDocumentsDirectory>../open-api</OpenApiDocumentsDirectory>
+    <OpenApiGenerateDocumentsOnBuild>true</OpenApiGenerateDocumentsOnBuild>
     <!-- Configure build-time OpenAPI generation to produce an OpenAPI 3.1 document -->
     <OpenApiGenerateDocumentsOptions>--openapi-version OpenApi3_1</OpenApiGenerateDocumentsOptions>
     <DockerfileContext>..\..</DockerfileContext>
