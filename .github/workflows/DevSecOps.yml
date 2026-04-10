@@ -1,0 +1,47 @@
+name: CI/CD Pipeline
+run-name: "${{ github.actor }} - ${{ github.run_id }}"
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'src/**'
+  pull_request:
+    branches: [main]
+    paths:
+      - 'src/**'
+  workflow_dispatch:
+    inputs:
+      buildMode:
+        description: "Qual ação deseja fazer?"
+        required: true
+        default: 'Build'
+        type: choice
+        options:
+          - Build
+          - Build + Tag Validation
+
+jobs:
+  devsecops:
+    name: DevSecOps Pipeline
+    uses: felipementel/reusable-workflows/.github/workflows/examples/dotnet-sandbox-api.yml@main
+    with:
+      buildMode: ${{ github.event_name == 'workflow_dispatch' && inputs.buildMode || 'Build' }}
+      environment: 'DEV'
+      dotnetVersion: '10.x'
+      projectBaseDir: ./src
+      solutionFileName: 'UsuariosApi.slnx'
+      mainProject: 'UsuariosApi'
+      testsFolder: 'tests'
+      reportTitle: 'Canal DEPLOY'
+      sonarExclusions: ''
+      imageName: 'project-api'
+      openAPIFolder: 'open-api'
+      msgCanalDeploy: 'Canal DEPLOY - O melhor canal sobre .NET, Azure, DevOps e IA'
+    secrets:
+      SONAR_PROJECT_KEY: ${{ secrets.SONAR_PROJECT_KEY }}
+      GITLEAKS_LICENSE: ${{ secrets.GITLEAKS_LICENSE }}
+      SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+      SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      SAFESWIFT_API_KEY: ${{ secrets.SAFESWIFT_API_KEY }}
+      DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
