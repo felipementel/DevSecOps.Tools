@@ -24,7 +24,7 @@ on:
 jobs:
   devsecops:
     name: DevSecOps Pipeline
-    uses: felipementel/reusable-workflows/.github/workflows/examples/dotnet-sandbox-api.yml@main
+    uses: felipementel/reusable-workflows/.github/workflows/example-devsecops-dotnet-sandbox-api.yml@main
     with:
       buildMode: ${{ github.event_name == 'workflow_dispatch' && inputs.buildMode || 'Build' }}
       environment: 'DEV'
