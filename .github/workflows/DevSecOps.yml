@@ -40,11 +40,12 @@ jobs:
       testsFolder: 'tests'
       reportTitle: 'Canal DEPLOY'
       sonarExclusions: ''
-      imageName: 'project-api'
+      imageName: 'usuariosapi'
       openAPIFolder: 'open-api'
       msgCanalDeploy: 'Canal DEPLOY - O melhor canal sobre .NET, Azure, DevOps e IA'
       dockerFileFullPath: './src/Dockerfile'
       dockerBuildContext: '.'
+      dockerSetup: true
     permissions:
       security-events: write
       contents: read
