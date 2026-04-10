@@ -20,7 +20,7 @@ on:
         options:
           - Build
           - Build + Tag Validation
-      environment:
+      environments:
         description: "Selecione o ambiente de implantação"
         required: true
         default: 'DEV'
