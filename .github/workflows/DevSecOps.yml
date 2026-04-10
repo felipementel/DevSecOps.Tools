@@ -44,7 +44,7 @@ jobs:
       openAPIFolder: 'open-api'
       msgCanalDeploy: 'Canal DEPLOY - O melhor canal sobre .NET, Azure, DevOps e IA'
       dockerFileFullPath: './src/Dockerfile'
-      dockerBuildContext: './src/'
+      dockerBuildContext: '.'
     permissions:
       security-events: write
       contents: read
