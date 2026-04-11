@@ -59,4 +59,4 @@ jobs:
       SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
       SAFETY_API_KEY: ${{ secrets.SAFETY_API_KEY }}
 
-  deploy-docker:
+#  deploy-docker:
