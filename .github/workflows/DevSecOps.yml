@@ -48,7 +48,7 @@ jobs:
       dockerSetup: true
     permissions:
       security-events: write
-      contents: read
+      contents: write
       id-token: write
       packages: write
     secrets:
