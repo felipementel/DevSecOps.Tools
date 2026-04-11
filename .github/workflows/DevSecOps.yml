@@ -20,6 +20,7 @@ on:
         options:
           - Build
           - Build + Tag Validation
+          - Build + Tag Validation + Deploy
       environments:
         description: "Selecione o ambiente de implantação"
         required: true
@@ -27,9 +28,9 @@ on:
         type: environment
 
 jobs:
-  devsecops:
+  build:
     name: DevSecOps Pipeline
-    uses: felipementel/reusable-workflows/.github/workflows/example-devsecops-dotnet-sandbox-api.yml@main
+    uses: felipementel/reusable-workflows/.github/workflows/dotnet-sandbox-api.yml@main
     with:
       buildMode: ${{ github.event_name == 'workflow_dispatch' && inputs.buildMode || 'Build' }}
       environment: ${{ inputs.environments || 'DEV' }}
@@ -57,3 +58,5 @@ jobs:
       SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
       SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
       SAFETY_API_KEY: ${{ secrets.SAFETY_API_KEY }}
+
+  deploy-docker:
