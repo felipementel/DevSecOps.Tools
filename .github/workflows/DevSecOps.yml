@@ -30,7 +30,7 @@ on:
 jobs:
   build:
     name: DevSecOps Pipeline
-    uses: felipementel/reusable-workflows/.github/workflows/dotnet-sandbox-api.yml@main
+    uses: felipementel/reusable-workflows/.github/workflows/dotnet-sandbox-api-build.yml@main
     with:
       buildMode: ${{ github.event_name == 'workflow_dispatch' && inputs.buildMode || 'Build' }}
       environment: ${{ inputs.environments || 'DEV' }}
@@ -59,4 +59,18 @@ jobs:
       SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
       SAFETY_API_KEY: ${{ secrets.SAFETY_API_KEY }}
 
-#  deploy-docker:
+  deploy:
+    name: Deploy to Azure Container Apps
+    if: ${{ github.event_name == 'workflow_dispatch' && inputs.buildMode == 'Build + Tag Validation + Deploy' && needs.build.outputs.image-exists == 'false' }}
+    needs: [build]
+    uses: felipementel/reusable-workflows/.github/workflows/dotnet-sandbox-api-deploy-aca.yml@main
+    with:
+      environment: ${{ inputs.environments || 'DEV' }}
+      tagVersion: ${{ needs.build.outputs.tag-version }}
+      imageName: 'usuariosapi'
+      msgCanalDeploy: 'Canal DEPLOY - O melhor canal sobre .NET, Azure, DevOps e IA'
+      azureRgBase: ${{ vars.AZURE_RG }}
+      acaeBaseName: ${{ vars.AZURE_ACAE_BASE }}
+      healthCheckPath: '/health/live'
+    secrets:
+      AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}
