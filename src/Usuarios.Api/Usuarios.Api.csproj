@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>net10.0</TargetFramework>
     <Nullable>enable</Nullable>
-    <Version>1.0.1</Version>
+    <Version>1.0.2</Version>
     <ImplicitUsings>enable</ImplicitUsings>
     <ContainerRepository>canal-deploy</ContainerRepository>
     <UserSecretsId>f37df685-f024-46d8-be4d-fbf46c25d53f</UserSecretsId>
