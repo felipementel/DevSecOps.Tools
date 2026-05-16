@@ -30,7 +30,7 @@ on:
 jobs:
   build:
     name: DevSecOps Pipeline
-    uses: felipementel/reusable-workflows/.github/workflows/dotnet-sandbox-api-build.yml@main
+    uses: felipementel/gh-actions/.github/workflows/dotnet-sandbox-api-build.yml@main
     with:
       buildMode: ${{ github.event_name == 'workflow_dispatch' && inputs.buildMode || 'Build' }}
       environment: ${{ inputs.environments || 'DEV' }}
@@ -47,6 +47,7 @@ jobs:
       dockerFileFullPath: './src/Dockerfile'
       dockerBuildContext: '.'
       dockerSetup: true
+      registry: 'ghcr.io'
     permissions:
       security-events: write
       contents: write
@@ -63,14 +64,21 @@ jobs:
     name: Deploy to Azure Container Apps
     if: ${{ github.event_name == 'workflow_dispatch' && inputs.buildMode == 'Build + Tag Validation + Deploy' && needs.build.outputs.image-exists == 'false' }}
     needs: [build]
-    uses: felipementel/reusable-workflows/.github/workflows/dotnet-sandbox-api-deploy-aca.yml@main
+    uses: felipementel/gh-actions/.github/workflows/dotnet-sandbox-api-deploy-aca.yml@main
+    permissions:
+      id-token: write
+      contents: read
+      packages: read
     with:
       environment: ${{ inputs.environments || 'DEV' }}
       tagVersion: ${{ needs.build.outputs.tag-version }}
       imageName: 'usuariosapi'
+      registry: 'ghcr.io'
       msgCanalDeploy: 'Canal DEPLOY - O melhor canal sobre .NET, Azure, DevOps e IA'
       azureRgBase: ${{ vars.AZURE_RG }}
       acaeBaseName: ${{ vars.AZURE_ACAE_BASE }}
       healthCheckPath: '/health/live'
     secrets:
-      AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}
+      AZURE_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
+      AZURE_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
+      AZURE_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
